@@ -1,16 +1,10 @@
+import { FriendListItem } from 'components/FriendListItem/FriendListItem';
 import PropTypes from 'prop-types';
-import {
-  FriendListStyled,
-  FriendItem,
-  Avatar,
-  FriendName,
-  Info,
-} from './FriendList.styled';
-import css from './FriendList.module.css';
+import { FriendListStyled, FriendWrapper } from './FriendList.styled';
 
 export const FriendList = ({ friends }) => {
   return (
-    <div>
+    <FriendListStyled>
       <p
         style={{
           paddingTop: '10px',
@@ -22,31 +16,25 @@ export const FriendList = ({ friends }) => {
       >
         Friends: {friends.length}
       </p>
-      <FriendListStyled>
+      <FriendWrapper>
         {friends.map(friend => {
-          const { avatar, name, id, isOnline } = friend;
+          const { name, avatar, id, isOnline } = friend;
           return (
-            <FriendItem key={id}>
-              <Avatar src={avatar} alt={avatar} width="48" />
-              <Info>
-                <span className={css[isOnline]}></span>
-                <FriendName>{name}</FriendName>
-              </Info>
-            </FriendItem>
+            <FriendListItem
+              key={id}
+              avatar={avatar}
+              name={name}
+              isOnline={isOnline}
+            />
           );
         })}
-      </FriendListStyled>
-    </div>
+      </FriendWrapper>
+    </FriendListStyled>
   );
 };
 
 FriendList.propTypes = {
   friends: PropTypes.arrayOf(
-    PropTypes.shape({
-      avatar: PropTypes.string.isRequired,
-      name: PropTypes.string.isRequired,
-      isOnline: PropTypes.bool.isRequired,
-      id: PropTypes.number.isRequired,
-    }).isRequired
-  ),
+    PropTypes.shape({ id: PropTypes.number.isRequired }).isRequired
+  ).isRequired,
 };

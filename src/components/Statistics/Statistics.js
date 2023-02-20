@@ -13,11 +13,11 @@ export const Statistics = ({ title, stats }) => {
       {title && <StatisticTitle>{title}</StatisticTitle>}
 
       <StatsList className="stat-list">
-        {stats.map((stat, index) => {
+        {stats.map(stat => {
           return (
             <StatsItem
               style={{ backgroundColor: getRandomHexColor() }}
-              key={index}
+              key={stat.id}
             >
               <span style={{ fontSize: 12 }}>{stat.label}</span>
               <span className="percentage">{stat.percentage}</span>
@@ -36,6 +36,6 @@ Statistics.propTypes = {
       id: PropTypes.string.isRequired,
       label: PropTypes.string.isRequired,
       percentage: PropTypes.number.isRequired,
-    }).isRequired
-  ),
+    })
+  ).isRequired,
 };
